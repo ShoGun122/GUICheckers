@@ -1,9 +1,15 @@
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.*;
 import javafx.scene.paint.Color;
@@ -89,5 +95,36 @@ public class Main extends Application
         }
         return board;
     }
+    public StackPane getBoardSquare(){
+        BoardSquare square=new BoardSquare(Color.BLACK);
+        StackPane stackPane = new StackPane(square);
+        stackPane.setOnMouseEntered(e -> square.highlight());
+        stackPane.setOnMouseExited(e -> square.blacken());
+        stackPane.setOnMouseClicked(new EventHandler<MouseEvent>()
+        {
+            Circle circle = new Circle();
+            {
+                NumberBinding radiusProperty = Bindings.when(square.widthProperty().greaterThan(square.heightProperty())).then(square.heightProperty().subtract(12).divide(2)).otherwise(square.widthProperty().subtract(12).divide(2));
+                circle.radiusProperty().bind(radiusProperty);
+                circle.setFill(Color.BEIGE);
+            }
+            @Override
+            public void handle(MouseEvent mouseEvent)
+            {
+                if(stackPane.getChildren().contains(circle)){
+                    stackPane.getChildren().remove(circle);
+                }
+                else{
+                    stackPane.getChildren().add(circle);
+                }
 
+
+            }
+        });
+        return stackPane;
+    }
 }
+
+
+
+

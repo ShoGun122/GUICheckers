@@ -1,6 +1,13 @@
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+import static javafx.beans.binding.Bindings.greaterThan;
 
 public class BoardSquare extends Region {
     private Color color;
@@ -21,8 +28,8 @@ public class BoardSquare extends Region {
         BackgroundFill bgFill = new BackgroundFill(color, CornerRadii.EMPTY, new Insets(2));
         Background bg = new Background(bgFill);
         setBackground(bg);
-    }
-
+    }}
+    /*
     public GridPane getBoard(){
         GridPane board=new GridPane();
         for(int row=0; row<ROW_COUNT;row++){
@@ -42,11 +49,4 @@ public class BoardSquare extends Region {
         }
         return board;
     }
-    public  BoardSquare getBoardSquare(){
-        BoardSquare square=new BoardSquare(Color.BLACK);
-        square.setOnMouseEntered(e -> square.highlight());
-        square.setOnMouseExited(e -> square.blacken());
-        return square;
-    }
-
-}
+    */
