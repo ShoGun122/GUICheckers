@@ -21,7 +21,7 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Scene scene = new Scene (getBoard(),200 ,200 ,Color.GRAY);
+        Scene scene = new Scene (getBoard(),600 ,600 ,Color.GRAY);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -43,10 +43,14 @@ public class Main extends Application
                     {
                         BoardSquare square = new BoardSquare(Color.BLACK);
                         board.add(square,row,col);
+                        square.setOnMouseEntered(e -> square.highlight());
+                        square.setOnMouseExited(e -> square.blacken());
                     } else
                     {
                         BoardSquare square = new BoardSquare(Color.WHITE);
                         board.add(square,row,col);
+                        square.setOnMouseEntered(e -> square.highlight());
+                        square.setOnMouseExited(e -> square.blacken());
                     }
                 }
             }
@@ -58,11 +62,15 @@ public class Main extends Application
                     {
                         BoardSquare square=new BoardSquare(Color.BLACK);
                         board.add(square,row,col);
+                        square.setOnMouseEntered(e -> square.highlight());
+                        square.setOnMouseExited(e -> square.blacken());
                     }
                     else
                     {
                         BoardSquare square=new BoardSquare(Color.WHITE);
                         board.add(square,row,col);
+                        square.setOnMouseEntered(e -> square.highlight());
+                        square.setOnMouseExited(e -> square.blacken());
                     }
                 }
             }
