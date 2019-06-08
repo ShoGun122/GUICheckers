@@ -27,6 +27,8 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        StackPane stPane = new StackPane();
+        GridPane gpPane = new GridPane();
         Scene scene = new Scene (getBoard(),600 ,600 ,Color.GRAY);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -36,8 +38,6 @@ public class Main extends Application
     {
 
         GridPane board = new GridPane();
-        //  i = row
-        //  j = column
 
         for(int row = 0; row <10 ; row++)
         {
@@ -47,16 +47,10 @@ public class Main extends Application
                 {
                     if (col % 2 == 0)
                     {
-                        BoardSquare square = new BoardSquare(Color.BLACK);
-                        board.add(square,row,col);
-                        square.setOnMouseEntered(e -> square.highlight());
-                        square.setOnMouseExited(e -> square.blacken());
+                        createRedField(board,row,col);
                     } else
                     {
-                        BoardSquare square = new BoardSquare(Color.WHITE);
-                        board.add(square,row,col);
-                        square.setOnMouseEntered(e -> square.highlight());
-                        square.setOnMouseExited(e -> square.blacken());
+                        createGreyField(board,row,col);
                     }
                 }
             }
@@ -66,17 +60,11 @@ public class Main extends Application
                 {
                     if(col%2!=0)
                     {
-                        BoardSquare square=new BoardSquare(Color.BLACK);
-                        board.add(square,row,col);
-                        square.setOnMouseEntered(e -> square.highlight());
-                        square.setOnMouseExited(e -> square.blacken());
+                        createRedField(board,row,col);
                     }
                     else
                     {
-                        BoardSquare square=new BoardSquare(Color.WHITE);
-                        board.add(square,row,col);
-                        square.setOnMouseEntered(e -> square.highlight());
-                        square.setOnMouseExited(e -> square.blacken());
+                        createGreyField(board,row,col);
                     }
                 }
             }
@@ -95,11 +83,30 @@ public class Main extends Application
         }
         return board;
     }
-    public StackPane getBoardSquare(){
-        BoardSquare square=new BoardSquare(Color.BLACK);
+    // == CREATING RED BOARD SQUARE
+    public void createRedField ( GridPane board, int row, int col)
+    {
+        BoardSquare square=new BoardSquare(Color.DARKRED);
+        StackPane stPane = getBoardSquare(Color.DARKRED);
+        board.add(stPane,row,col);
+        square.setOnMouseEntered(e -> square.highlight());
+        square.setOnMouseExited(e -> square.blacken());
+    }
+    // == CREATING GREY BOARD SQUARE
+    public  void createGreyField (GridPane board, int row, int col)
+    {
+        BoardSquare square = new BoardSquare(Color.LIGHTGREY);
+        StackPane stPane = getBoardSquare(Color.LIGHTGREY);
+        board.add(stPane,row,col);
+        square.setOnMouseEntered(e -> square.highlight());
+        square.setOnMouseExited(e -> square.blacken());
+    }
+    public StackPane getBoardSquare(Color color){
+        BoardSquare square=new BoardSquare(color);
         StackPane stackPane = new StackPane(square);
         stackPane.setOnMouseEntered(e -> square.highlight());
         stackPane.setOnMouseExited(e -> square.blacken());
+
         stackPane.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             Circle circle = new Circle();
