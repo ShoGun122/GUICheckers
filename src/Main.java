@@ -30,6 +30,7 @@ public class Main extends Application
         StackPane stPane = new StackPane();
         GridPane gpPane = new GridPane();
         Scene scene = new Scene (getBoard(),600 ,600 ,Color.GRAY);
+        scene.getStylesheets().add("checkersStyles.css");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -89,8 +90,8 @@ public class Main extends Application
         BoardSquare square=new BoardSquare(Color.DARKRED);
         StackPane stPane = getBoardSquare(Color.DARKRED);
         board.add(stPane,row,col);
-        square.setOnMouseEntered(e -> square.highlight());
-        square.setOnMouseExited(e -> square.blacken());
+        //square.setOnMouseEntered(e -> square.setStyle("-fx-background-color: #EF9A9A;"));
+        //square.setOnMouseExited(e -> square.setStyle("-fx-background-color: #8B0000;"));
     }
     // == CREATING GREY BOARD SQUARE
     public  void createGreyField (GridPane board, int row, int col)
@@ -98,15 +99,27 @@ public class Main extends Application
         BoardSquare square = new BoardSquare(Color.LIGHTGREY);
         StackPane stPane = getBoardSquare(Color.LIGHTGREY);
         board.add(stPane,row,col);
-        square.setOnMouseEntered(e -> square.highlight());
-        square.setOnMouseExited(e -> square.blacken());
+        //square.setOnMouseEntered(e -> square.setStyle("-fx-background-color: #EF9A9A;"));
+        //square.setOnMouseExited(e -> square.setStyle("-fx-background-color: #D3D3D3;"));
     }
+    // == ADDING PIECES
     public StackPane getBoardSquare(Color color){
         BoardSquare square=new BoardSquare(color);
         StackPane stackPane = new StackPane(square);
-        stackPane.setOnMouseEntered(e -> square.highlight());
-        stackPane.setOnMouseExited(e -> square.blacken());
-
+        /*
+        if(color == Color.DARKRED)
+        {
+            square.setOnMouseEntered(e -> square.setStyle("-fx-background-color: #66BB6A;"));
+            square.setOnMouseExited(e -> square.setStyle("-fx-background-color: #8B0000;"));
+        }
+        else
+        {
+            square.setOnMouseEntered(e -> square.setStyle("-fx-background-color: #FFEB3B;"));
+            square.setOnMouseExited(e -> square.setStyle("-fx-background-color: #D3D3D3;"));
+        }
+        */
+        square.setOnMouseEntered(e -> square.getStyleClass().add("hoverBoardSquare"));
+        square.setOnMouseExited(e -> square.getStyleClass().remove("hoverBoardSquare"));
         stackPane.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             Circle circle = new Circle();
@@ -130,6 +143,7 @@ public class Main extends Application
         });
         return stackPane;
     }
+
 }
 
 

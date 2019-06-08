@@ -25,7 +25,7 @@ public class BoardSquare extends Region {
         setColor(color);
     }
     public void setColor(Color color) {
-        BackgroundFill bgFill = new BackgroundFill(color, CornerRadii.EMPTY, new Insets(2));
+        BackgroundFill bgFill = new BackgroundFill(color, CornerRadii.EMPTY, new Insets(0));
         Background bg = new Background(bgFill);
         setBackground(bg);
     }}
