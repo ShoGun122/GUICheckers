@@ -1,0 +1,26 @@
+https://docs.oracle.com/javafx/2/css_tutorial/jfxpub-css_tutorial.htm
+
+https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html
+
+
+
+public StackPane setTeams (Color color, StackPane pane)
+    {
+        BoardSquare square=new BoardSquare(color);
+        StackPane stackPane = pane;
+        Circle circleB = new Circle();
+        {
+            NumberBinding radiusProperty = Bindings.when(square.widthProperty().greaterThan(square.heightProperty())).then(square.heightProperty().subtract(12).divide(2)).otherwise(square.widthProperty().subtract(12).divide(2));
+            circleB.radiusProperty().bind(radiusProperty);
+            circleB.setFill(Color.BLACK);
+        }
+        Circle circleW = new Circle();
+        {
+            NumberBinding radiusProperty = Bindings.when(square.widthProperty().greaterThan(square.heightProperty())).then(square.heightProperty().subtract(12).divide(2)).otherwise(square.widthProperty().subtract(12).divide(2));
+            circleW.radiusProperty().bind(radiusProperty);
+            circleW.setFill(Color.WHITE);
+        }
+        stackPane.getChildren().add(circleB);
+
+        return stackPane;
+    }
